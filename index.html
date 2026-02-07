@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name | Portfolio</title>
+  <title>Matthew Lam | Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
+  <canvas id="bg"></canvas>
   <header class="nav">
-    <a class="logo" href="#">YN</a>
+    <a class="logo" href="/" aria-label="Home">
+      <img src="images/logo/images.jpeg" alt="Matthew Lam GitHub profile picture" />
+    </a>
     <nav class="links">
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
@@ -19,13 +23,13 @@
 
   <main class="container">
     <section class="hero">
-      <h1>Hi, I’m <span class="accent">Your Name</span>.</h1>
+      <h1>Hi, I’m <span class="accent">Matthew Lam </span><span class="wave" aria-hidden="true">👋</span>.</h1>
       <p class="subtitle">
-        CS student building cool stuff — web, apps, and anything that teaches me something new.
+        Shrewsbury School student learning by building projects through AI and courses.
       </p>
       <div class="hero-actions">
         <a class="btn" href="#projects">View Projects</a>
-        <a class="btn btn-ghost" href="https://github.com/YOURUSERNAME" target="_blank" rel="noreferrer">
+        <a class="btn btn-ghost" href="https://github.com/Matthew-Lam0704" target="_blank" rel="noreferrer">
           GitHub
         </a>
       </div>
@@ -34,61 +38,76 @@
     <section id="projects" class="section">
       <h2>Projects</h2>
       <div class="grid">
-        <article class="card">
-          <h3>Project One</h3>
-          <p>1–2 lines explaining what it does and what you learned.</p>
-          <div class="tags">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Live</a>
-            <a href="#" target="_blank" rel="noreferrer">Code</a>
-          </div>
-        </article>
+        <a href="https://github.com/Matthew-Lam0704/aEye" target="_blank" rel="noreferrer" class="card-link" aria-label="aEye Github repository">
+          <article class="card project-card">
+            <h3 class="card-title">
+              aEye
+              <i class="fa-brands fa-github"></i>
+            </h3>
+            <p>A mobile app to help the visually impaired detect what is in front of them and on the table</p>
+            <div class="tags">
+              <span>Python</span><span>HTML</span><span>CSS</span><span>JS</span>
+            </div>
 
-        <article class="card">
-          <h3>Project Two</h3>
-          <p>Keep it clear: problem → solution → result.</p>
-          <div class="tags">
-            <span>Python</span><span>API</span>
-          </div>
-          <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Live</a>
-            <a href="#" target="_blank" rel="noreferrer">Code</a>
-          </div>
-        </article>
+            <!--Hover preview-->
+            <div class="hover-preview" aria-hidden="true">
+              <div class="phone">
+                <div class="screen">
+                  <img src="https://opengraph.githubassets.com/1/Matthew-Lam0704/aEye" alt=""/>
+                </div>
+              </div>
+            </div>
+          </article>
+        </a>
 
-        <article class="card">
-          <h3>Project Three</h3>
-          <p>What’s unique about it? What’s the hardest part you solved?</p>
-          <div class="tags">
-            <span>Data</span><span>SQL</span>
-          </div>
-          <div class="card-links">
-            <a href="#" target="_blank" rel="noreferrer">Live</a>
-            <a href="#" target="_blank" rel="noreferrer">Code</a>
-          </div>
-        </article>
+        <a href="https://github.com/Matthew-Lam0704/Portfolio" target="_blank" rel="noreferrer" class="card-link" aria-label="Portfolio Github repository">
+          <article class="card">
+            <h3 class="card-title">
+              Portfolio
+              <i class="fa-brands fa-github"></i>
+            </h3>
+            <p>Building this portfolio through AI and online courses</p>
+            <div class="tags">
+              <span>HTML</span><span>CSS</span><span>JS</span>
+            </div>
+          </article>
+        </a>
+
+        <a href="#" target="_blank" rel="noreferrer" class="card-link" aria-label="Project Github repository">
+          <article class="card">
+            <h3 class="card-title">
+              Project 3
+              <i class="fa-brands fa-github"></i>
+            </h3>
+            <p>Short description</p>
+            <div class="tags">
+              <span>HTML</span><span>CSS</span><span>JS</span>
+            </div>
+          </article>
+        </a>
       </div>
     </section>
 
     <section id="about" class="section">
-      <h2>About</h2>
+      <h2>About me</h2>
       <p>
-        Write a short story: what you’re learning, what you enjoy building, and what you want to do next.
+        I am currently a student at Shrewsbury School, learning by building projects through AI and online courses. I am passionate about technology and programming, and I am always eager to learn new skills and take on new challenges. 
+      </p>
+      <p>
+        If not coding, usually out playing football, basketball, or volleyball. And occasional gaming here and there.
       </p>
     </section>
 
     <section id="contact" class="section">
       <h2>Contact</h2>
       <p>
-        Email me at <a href="mailto:you@example.com">you@example.com</a>
+        Email me at <a href="mailto:you@example.com">mattm3m3@gmail.com</a>
       </p>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Your Name</p>
+    <p>© <span id="year"></span> Matthew lam</p>
   </footer>
 
   <script src="script.js"></script>
