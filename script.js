@@ -11,74 +11,14 @@ function setTheme(mode) {
 const saved = localStorage.getItem("theme");
 if (saved) setTheme(saved);
 
+themeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+
 themeBtn.addEventListener("click", () => {
   const isLight = document.body.classList.contains("light");
-  setTheme(isLight ? "dark" : "light");
+  const next = isLight ? "dark" : "light";
+  setTheme(next);
+  themeBtn.textContent = next === "light" ? "🌙" : "☀️";
 });
-
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-
-let w, h, particles;
-
-function resize() {
-  w = canvas.width = window.innerWidth * devicePixelRatio;
-  h = canvas.height = window.innerHeight * devicePixelRatio;
-  canvas.style.width = window.innerWidth + "px";
-  canvas.style.height = window.innerHeight + "px";
-  init();
-}
-
-function init() {
-  const count = Math.floor(Math.min(window.innerWidth, 1200) / 10);
-  particles = Array.from({ length: count }, () => ({
-    x: Math.random() * w,
-    y: Math.random() * h,
-    vx: (Math.random() - 0.5) * 0.35 * devicePixelRatio,
-    vy: (Math.random() - 0.5) * 0.35 * devicePixelRatio,
-    r: (Math.random() * 1.6 + 0.6) * devicePixelRatio
-  }));
-}
-
-function step() {
-  ctx.clearRect(0, 0, w, h);
-
-  // dots
-  for (const p of particles) {
-    p.x += p.vx;
-    p.y += p.vy;
-
-    if (p.x < 0 || p.x > w) p.vx *= -1;
-    if (p.y < 0 || p.y > h) p.vy *= -1;
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(200,210,255, 0.75)";
-    ctx.fill();
-  }
-
-  // lines (connect nearby dots)
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const a = particles[i], b = particles[j];
-      const dx = a.x - b.x, dy = a.y - b.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist < 140 * devicePixelRatio) {
-        ctx.strokeStyle = `rgba(124,92,255,${(1 - dist / (140*devicePixelRatio)) * 0.25})`;
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.stroke();
-      }
-    }
-  }
-
-  requestAnimationFrame(step);
-}
-
-window.addEventListener("resize", resize);
-resize();
-step();
 
 (() => {
   const canvas = document.getElementById("bg");
@@ -208,4 +148,20 @@ step();
 
   resize();
   tick();
+})();
+
+(() => {
+  const revealTargets = document.querySelectorAll(".section, .card-link");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }
+  );
+
+  revealTargets.forEach((item) => observer.observe(item));
 })();

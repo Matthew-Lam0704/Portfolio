@@ -5,6 +5,7 @@
   --card:#141826;
   --border:#222840;
   --accent:#7c5cff;
+  --shadow: 0 16px 45px rgba(0,0,0,0.28);
 }
 
 /* Moving background layer */
@@ -55,12 +56,16 @@ body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background:var(--bg);
   color:var(--text);
+  line-height:1.55;
+  text-rendering: optimizeLegibility;
 }
 
 .container{
   width:min(1000px, 92%);
   margin:0 auto;
   padding:32px 0 64px;
+  position:relative;
+  z-index:1;
 }
 
 .nav{
@@ -92,8 +97,30 @@ body{
 .links a{
   color:var(--muted);
   text-decoration:none;
+  font-weight:500;
+  position:relative;
+  transition:color 0.2s ease;
 }
-.links a:hover{ color:var(--text); }
+.links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:100%;
+  height:2px;
+  border-radius:999px;
+  background:var(--accent);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform 0.2s ease;
+}
+.links a:hover{
+  color:var(--text);
+}
+.links a:hover::after{
+  transform:scaleX(1);
+  transform-origin:left;
+}
 
 .theme-btn{
   border:1px solid var(--border);
@@ -102,10 +129,15 @@ body{
   padding:8px 10px;
   border-radius:10px;
   cursor:pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.theme-btn:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
 }
 
 .hero{
-  padding:56px 0 28px;
+  padding:68px 0 38px;
 }
 .hero h1{
   font-size: clamp(34px, 5vw, 52px);
@@ -122,16 +154,22 @@ body{
   display:flex;
   gap:12px;
   margin-top:18px;
+  flex-wrap:wrap;
 }
 
 .btn{
   display:inline-block;
-  padding:10px 14px;
+  padding:11px 15px;
   border-radius:12px;
   background:var(--accent);
   color:white;
   text-decoration:none;
   font-weight:600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px color-mix(in oklab, var(--accent) 30%, transparent);
 }
 .btn-ghost{
   background:transparent;
@@ -139,8 +177,11 @@ body{
   color:var(--text);
 }
 
-.section{ margin-top:48px; }
-.section h2{ margin:0 0 14px; }
+.section{ margin-top:56px; }
+.section h2{
+  margin:0 0 14px;
+  font-size: clamp(1.35rem, 2.3vw, 1.7rem);
+}
 
 .grid{
   display:grid;
@@ -154,12 +195,36 @@ body{
   border:1px solid var(--border);
   border-radius:18px;
   padding:16px;
-  transition: transform 0.15s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   height:100%;
   display:flex;
   flex-direction:column;
+  box-shadow: var(--shadow);
+  position:relative;
+  isolation:isolate;
 }
-.card:hover{ transform: translateY(-3px); }
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 45%, transparent), transparent 45%, color-mix(in oklab, #00d4ff 30%, transparent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity:0;
+  transition: opacity 0.2s ease;
+  pointer-events:none;
+}
+.card:hover{
+  transform: translateY(-5px);
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
+}
+.card-link:hover .card::before{
+  opacity:1;
+}
 
 .card p{ color:var(--muted); line-height:1.5; }
 
@@ -170,6 +235,7 @@ body{
   border-radius:999px;
   border:1px solid var(--border);
   color:var(--muted);
+  background: color-mix(in oklab, var(--card) 70%, var(--bg));
 }
 
 .card-links{ display:flex; gap:12px; }
@@ -196,6 +262,21 @@ body{
   text-decoration:none;
   color:inherit;
   display: block;
+}
+
+#about p, #contact p{
+  color:var(--muted);
+  max-width:75ch;
+}
+
+#contact a{
+  color:var(--text);
+  text-underline-offset:3px;
+  text-decoration-color: color-mix(in oklab, var(--accent) 55%, transparent);
+}
+
+#contact a:hover{
+  color:var(--accent);
 }
 
 .card-title{
@@ -252,6 +333,12 @@ body{
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 35%, transparent);
 }
 
+a:focus-visible,
+button:focus-visible{
+  outline:2px solid color-mix(in oklab, var(--accent) 80%, white);
+  outline-offset:3px;
+}
+
 @media (min-width: 768px){
   .logo img{
     width:40px;
@@ -267,30 +354,27 @@ body{
 /* hidden by default */
 .hover-preview{
   position: absolute;
-  right: -30px;
-  top: -70px;
-  z-index: 50;
+  left: -240px;
+
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
 
   opacity: 0;
-  transform: translateY(10px);
   transition: opacity 0.2s ease, transform 0.2s ease;
-
-  pointer-events: none;
 }
 
-/* show on hover */
 .card-link:hover .hover-preview{
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(-50%) translateX(0);
 }
 
 /* iPhone frame */
 .phone{
-  width: 180px;
+  width: 220px;          /* bigger phone */
   aspect-ratio: 9 / 19.5;
   position: relative;
 
-  padding: 10px;
+  padding: 7px;
   border-radius: 38px;
 
   background: linear-gradient(180deg, #2a2a2f, #0f1014);
@@ -300,8 +384,7 @@ body{
     0 25px 60px rgba(0,0,0,0.55),
     inset 0 0 0 1px rgba(255,255,255,0.08);
 
-  transform: rotate(12deg) scale(0.95);
-  transform-origin: bottom left;
+  transform: none;       /* straight */
 }
 
 /* screen */
@@ -347,16 +430,47 @@ body{
 .screen{
   width: 100%;
   height: 100%;
+
   border-radius: 28px;
   overflow: hidden;
-  background: #0b0d12; /* fallback */
-  position: relative;
+
+  background: #000;
+
+  /* reduce internal padding */
+  padding: 4px 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* show the whole image instead of cropping it away */
 .screen img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* IMPORTANT */
-  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+
+  /* visually enlarge while still fully visible */
+  transform: scale(1.08);
+}
+
+/* gentle reveal as sections/cards enter */
+.section,
+.card-link{
+  opacity:0;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.is-visible{
+  opacity:1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
 }
