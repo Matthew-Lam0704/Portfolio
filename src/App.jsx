@@ -315,7 +315,7 @@ const App = () => {
         
         <div className="relative z-20 hero-content text-background max-w-5xl">
           <div className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-6">
-            // 11TH GRADE · CS APPLICANT · CLASS OF 2026
+            // SHREWSBURY SCHOOL · CLASS OF 2027
           </div>
           <h1 className="font-heading font-extrabold text-7xl md:text-[10rem] leading-[0.85] tracking-tighter mb-8">
             Vibe coder who <br />
@@ -359,7 +359,7 @@ const App = () => {
           }}
         />
         <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center">
-          <div className="phi-text font-heading text-xl md:text-2xl text-dark/40 mb-4 tracking-tight uppercase">
+          <div className="phi-text font-heading text-xl md:text-2xl text-background/60 mb-4 tracking-tight uppercase">
             Most students learn to code.
           </div>
           <div className="phi-text font-drama italic text-5xl md:text-9xl leading-tight">
@@ -469,20 +469,20 @@ const App = () => {
       <section className="py-24 px-8 md:px-24 bg-background">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="bg-background border border-dark/10 p-10 rounded-[2rem] flex flex-col items-center justify-center text-center">
-            <span className="font-mono text-[10px] text-dark/40 uppercase tracking-widest mb-2">GPA (Unweighted)</span>
-            <div className="text-5xl font-heading font-black">4.0</div>
+            <span className="font-mono text-[10px] text-dark/40 uppercase tracking-widest mb-2">A-Levels</span>
+            <div className="text-5xl font-heading font-black">TBD</div>
           </div>
           <div className="bg-background border border-dark/10 p-10 rounded-[2rem] flex flex-col items-center justify-center text-center">
-            <span className="font-mono text-[10px] text-dark/40 uppercase tracking-widest mb-2">SAT / ACT</span>
-            <div className="text-5xl font-heading font-black">1550</div>
+            <span className="font-mono text-[10px] text-dark/40 uppercase tracking-widest mb-2">SAT Score</span>
+            <div className="text-5xl font-heading font-black">1440</div>
           </div>
           <div className="bg-background border border-dark/10 p-10 rounded-[2rem] flex flex-col items-center justify-center text-center">
             <span className="font-mono text-[10px] text-dark/40 uppercase tracking-widest mb-2">Projects Shipped</span>
-            <div className="text-5xl font-heading font-black">08</div>
+            <div className="text-5xl font-heading font-black">00</div>
           </div>
           <div className="bg-background border border-dark/10 p-10 rounded-[2rem] flex flex-col items-center justify-center text-center">
             <span className="font-mono text-[10px] text-dark/40 uppercase tracking-widest mb-2">Languages</span>
-            <div className="text-5xl font-heading font-black">06</div>
+            <div className="text-5xl font-heading font-black">03</div>
           </div>
         </div>
       </section>
@@ -514,7 +514,7 @@ const App = () => {
             <div>
               <div className="font-heading font-black text-4xl mb-4">Matthew Lam</div>
               <p className="text-background/40 max-w-xs font-mono text-xs uppercase tracking-widest leading-loose">
-                Passionate vibe coder building websites and projects. Aiming for MIT / Stanford Class of 2030.
+                Passionate vibe coder building websites and projects. Shrewsbury School Class of 2027.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-12 font-mono text-[10px] uppercase tracking-[0.2em]">
