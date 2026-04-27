@@ -313,57 +313,62 @@ const App = () => {
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
         
-        <div className="relative z-20 hero-content text-background max-w-5xl">
-          <div className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-6">
-            // SHREWSBURY SCHOOL · CLASS OF 2027
+        <div className="relative z-20 hero-content text-background w-full max-w-7xl flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="max-w-3xl">
+            <div className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-6">
+              // SHREWSBURY SCHOOL · CLASS OF 2027
+            </div>
+            <h1 className="font-heading font-extrabold text-7xl md:text-[8rem] leading-[0.85] tracking-tighter mb-8">
+              Hi, I am <br />
+              <span className="font-drama italic font-light text-accent ml-[5vw]">Matthew Lam.</span>
+            </h1>
           </div>
-          <h1 className="font-heading font-extrabold text-7xl md:text-[10rem] leading-[0.85] tracking-tighter mb-8">
-            Vibe coder who <br />
-            <span className="font-drama italic font-light text-accent ml-[10vw]">builds.</span>
-          </h1>
-          <button className="magnetic-button group bg-accent px-10 py-4 rounded-full mt-8">
-            <span className="btn-slide-bg bg-primary" />
-            <span className="relative z-10 font-heading text-sm font-bold uppercase tracking-widest">Explore Systems</span>
-          </button>
-        </div>
-      </section>
-
-      {/* SIGNAL STRIP (ABOUT) */}
-      <section id="about" className="py-24 px-8 md:px-24 bg-background">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
-          <div className="flex flex-col gap-4">
-            <h3 className="font-heading font-bold text-2xl tracking-tight">Skill Shuffler</h3>
-            <p className="text-dark/60 text-sm mb-4">A high-frequency rotation of my current technical stack and expertise domains.</p>
-            <SkillShuffler />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="font-heading font-bold text-2xl tracking-tight">Activity Telemetry</h3>
-            <p className="text-dark/60 text-sm mb-4">Real-time status updates from my local development environment and study logs.</p>
-            <ActivityTelemetry />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="font-heading font-bold text-2xl tracking-tight">Achievements</h3>
-            <p className="text-dark/60 text-sm mb-4">A weekly scheduler mapping milestones and accomplishments across my CS journey.</p>
-            <AchievementsScheduler />
+          <div className="w-full md:w-1/3 aspect-[3/4] rounded-[2.5rem] overflow-hidden border border-background/20 relative shrink-0">
+             <img src="/matthew.jpg" alt="Matthew Lam" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
 
-      {/* PHILOSOPHY */}
-      <section className="phi-section relative py-48 px-8 md:px-24 bg-dark text-background overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-20 parallax z-0"
-          style={{ 
-            backgroundImage: `url('https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1974&auto=format&fit=crop')`,
-            backgroundSize: 'cover'
-          }}
-        />
-        <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center">
-          <div className="phi-text font-heading text-xl md:text-2xl text-background/60 mb-4 tracking-tight uppercase">
-            Most students learn to code.
-          </div>
-          <div className="phi-text font-drama italic text-5xl md:text-9xl leading-tight">
-            I build things <span className="text-accent">people use.</span>
+
+
+      {/* EDUCATION */}
+      <section id="education" className="phi-section relative py-32 px-8 md:px-24 bg-dark text-background overflow-hidden">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-16">// EDUCATION</div>
+          
+          <div className="flex flex-col gap-24">
+            {/* School 1 */}
+            <div className="phi-text flex flex-col md:flex-row items-center gap-12 group">
+              <div className="w-full md:w-5/12 aspect-video rounded-[2rem] overflow-hidden border border-background/10">
+                <img src="/po-leung-kuk.jpg" alt="Po Leung Kuk Choi Kai Yau School" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+              </div>
+              <div className="w-full md:w-7/12 flex flex-col">
+                <h3 className="font-heading font-black text-4xl md:text-5xl mb-2">Po Leung Kuk Choi Kai Yau School</h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-accent mb-6">Sep. 2015 — Jun. 2025 · Hong Kong</div>
+                <div className="text-background/70 text-lg leading-relaxed mb-6 space-y-4">
+                  <p><strong>CIE IGCSEs:</strong></p>
+                  <ul className="list-none space-y-2">
+                    <li className="flex items-start gap-4"><span className="text-accent font-bold min-w-[2ch]">A*</span> <span>Chemistry, Economics, International Mathematics, Additional Mathematics</span></li>
+                    <li className="flex items-start gap-4"><span className="text-accent font-bold min-w-[2ch]">A</span> <span>English, Global Perspectives, Physics, Biology, Geography</span></li>
+                    <li className="flex items-start gap-4"><span className="text-accent font-bold min-w-[2ch]">B</span> <span>Chinese</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* School 2 */}
+            <div className="phi-text flex flex-col md:flex-row items-center gap-12 group">
+              <div className="w-full md:w-5/12 aspect-video rounded-[2rem] overflow-hidden border border-background/10">
+                <img src="/shrewsbury.jpg" alt="Shrewsbury School" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+              </div>
+              <div className="w-full md:w-7/12 flex flex-col">
+                <h3 className="font-heading font-black text-4xl md:text-5xl mb-2">Shrewsbury School</h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-accent mb-6">Aug. 2025 — Jun. 2027 · Shrewsbury, UK</div>
+                <p className="text-background/70 text-lg leading-relaxed">
+                  Currently pursuing A-Levels. Predicted grades pending.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
