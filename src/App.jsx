@@ -245,18 +245,7 @@ const App = () => {
         ease: 'power2.out'
       });
 
-      // Project Cards Stagger
-      gsap.from('.project-card', {
-        scrollTrigger: {
-          trigger: '.projects-section',
-          start: 'top 60%',
-        },
-        y: 100,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 1,
-        ease: 'power3.out'
-      });
+
 
       // Protocol Stacking Logic
       const protocolCards = gsap.utils.toArray('.protocol-card');
@@ -295,7 +284,6 @@ const App = () => {
         <div className="hidden md:flex items-center gap-8 font-heading text-sm font-semibold text-dark/70">
           <a href="#about" className="hover-lift hover:text-primary transition-colors uppercase tracking-widest text-[10px]">About</a>
           <a href="#projects" className="hover-lift hover:text-primary transition-colors uppercase tracking-widest text-[10px]">Projects</a>
-          <a href="#protocol" className="hover-lift hover:text-primary transition-colors uppercase tracking-widest text-[10px]">Process</a>
           <a href="#contact" className="hover-lift hover:text-primary transition-colors uppercase tracking-widest text-[10px]">Contact</a>
         </div>
 
@@ -373,101 +361,64 @@ const App = () => {
         </div>
       </section>
 
-      {/* PROJECTS SECTION */}
-      <section id="projects" className="projects-section py-32 px-8 md:px-24 bg-background border-t border-dark/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
-            <div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-4">// SELECTED WORK</div>
-              <h2 className="text-7xl font-heading font-black tracking-tighter">Projects.</h2>
-            </div>
-            <div className="font-mono text-sm text-dark/40 tracking-tighter uppercase">
-              // 0{PROJECTS.length} SHIPPED · 2024 - 2026
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
-            {PROJECTS.map((project, idx) => (
-              <div 
-                key={project.title} 
-                className={`project-card group relative ${idx % 2 !== 0 ? 'md:translate-y-20' : ''}`}
-              >
-                <div className="aspect-video w-full bg-dark/5 rounded-[2.5rem] mb-8 overflow-hidden relative border border-dark/5 shadow-sm group-hover:border-accent/30 transition-colors">
-                  {/* Procedural Visual (Simplified for MVP, would use Canvas in production) */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-40 mix-blend-multiply transition-transform duration-700 group-hover:scale-110">
-                    {idx % 3 === 0 && <Cpu className="text-primary" size={120} />}
-                    {idx % 3 === 1 && <Brain className="text-accent" size={120} />}
-                    {idx % 3 === 2 && <Layers className="text-dark" size={120} />}
+
+      {/* PROJECTS (STACKING) */}
+      <section id="projects" className="relative py-0 bg-dark">
+        {PROJECTS.map((project, idx) => {
+          const bgColors = ['bg-primary', 'bg-[#1e2a23]', 'bg-dark'];
+          const Icons = [Cpu, Brain, Layers];
+          const Icon = Icons[idx % Icons.length];
+          
+          return (
+            <div 
+              key={project.title}
+              className={`protocol-card min-h-screen w-full ${bgColors[idx % bgColors.length]} flex items-center justify-center p-8 md:p-24 overflow-hidden border-t border-background/5`}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-7xl mx-auto items-center">
+                <div className="text-background">
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="font-mono text-xs uppercase tracking-widest text-accent">Project 0{idx + 1}</span>
+                    <div className="flex gap-2">
+                      {project.tech.map(t => (
+                        <span key={t} className="font-mono text-[8px] uppercase border border-background/20 px-2 py-0.5 rounded-full text-background/40">{t}</span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  <h2 className="text-6xl md:text-8xl font-heading font-black mb-8 leading-[0.9] tracking-tighter">
+                    {project.title}.
+                  </h2>
+                  
+                  <p className="text-background/60 text-lg md:text-xl max-w-md mb-12 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex gap-8">
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="group/link flex items-center gap-3 font-heading font-bold text-xs uppercase tracking-[0.2em] text-accent hover:text-background transition-colors">
+                      <GithubIcon size={18} /> 
+                      <span className="border-b border-accent/30 group-hover/link:border-background transition-colors pb-1">Source Code</span>
+                    </a>
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="group/link flex items-center gap-3 font-heading font-bold text-xs uppercase tracking-[0.2em] text-accent hover:text-background transition-colors">
+                      <ExternalLink size={18} /> 
+                      <span className="border-b border-accent/30 group-hover/link:border-background transition-colors pb-1">Live Demo</span>
+                    </a>
+                  </div>
                 </div>
                 
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <span className="font-mono text-[10px] text-accent tracking-widest">// 0{idx + 1}</span>
-                  <div className="flex gap-2">
-                    {project.tech.map(t => (
-                      <span key={t} className="font-mono text-[9px] uppercase border border-dark/10 px-2 py-1 rounded-full text-dark/50">{t}</span>
-                    ))}
-                  </div>
-                </div>
-                
-                <h3 className="font-heading font-black text-4xl mb-4 group-hover:text-accent transition-colors">{project.title}</h3>
-                <p className="text-dark/60 leading-relaxed mb-8 max-w-lg">{project.description}</p>
-                
-                <div className="flex gap-6">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-widest hover:text-accent transition-colors">
-                    <GithubIcon size={14} /> Github
-                  </a>
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-heading font-bold text-xs uppercase tracking-widest hover:text-accent transition-colors">
-                    <ExternalLink size={14} /> Demo
-                  </a>
+                <div className="relative aspect-square bg-background/5 rounded-[3rem] border border-background/10 flex items-center justify-center group overflow-hidden">
+                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                   <Icon className="text-accent/20 group-hover:text-accent/40 transition-all duration-700 group-hover:scale-110 group-hover:rotate-12" size={240} />
+                   
+                   {/* Decorative elements */}
+                   <div className="absolute top-8 right-8 font-mono text-[10px] text-background/20 uppercase tracking-[0.3em] vertical-text">
+                     // SYSTEM DATA 0{idx + 1}
+                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PROTOCOL (STACKING) */}
-      <section id="protocol" className="relative py-0 bg-dark">
-        <div className="protocol-card min-h-screen w-full bg-primary flex items-center justify-center p-8 md:p-24 overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-7xl mx-auto items-center">
-            <div className="text-background">
-              <span className="font-mono text-xs uppercase tracking-widest text-accent mb-4 block">01 — Phase One</span>
-              <h2 className="text-6xl font-heading font-black mb-8 leading-[0.9]">Research Deeply.</h2>
-              <p className="text-background/60 text-lg max-w-md">I believe in first principles thinking. Before touching a single line of code, I immerse myself in documentation, papers, and system design.</p>
             </div>
-            <div className="aspect-square bg-background/5 rounded-full border border-background/10 flex items-center justify-center animate-pulse">
-               <Activity className="text-accent" size={200} />
-            </div>
-          </div>
-        </div>
-        
-        <div className="protocol-card min-h-screen w-full bg-[#1e2a23] flex items-center justify-center p-8 md:p-24 overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-7xl mx-auto items-center">
-            <div className="text-background">
-              <span className="font-mono text-xs uppercase tracking-widest text-accent mb-4 block">02 — Phase Two</span>
-              <h2 className="text-6xl font-heading font-black mb-8 leading-[0.9]">Prototype Fast.</h2>
-              <p className="text-background/60 text-lg max-w-md">Speed is a signal of intent. I build functional skeletons rapidly to test constraints and discover unexpected edge cases.</p>
-            </div>
-            <div className="aspect-square bg-background/5 rounded-full border border-background/10 flex items-center justify-center">
-               <Terminal className="text-accent animate-pulse" size={200} />
-            </div>
-          </div>
-        </div>
-
-        <div className="protocol-card min-h-screen w-full bg-dark flex items-center justify-center p-8 md:p-24 overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-7xl mx-auto items-center">
-            <div className="text-background">
-              <span className="font-mono text-xs uppercase tracking-widest text-accent mb-4 block">03 — Phase Three</span>
-              <h2 className="text-6xl font-heading font-black mb-8 leading-[0.9]">Ship and Iterate.</h2>
-              <p className="text-background/60 text-lg max-w-md">A system is never truly finished. I deploy early and use real-world telemetry to polish performance and refine the experience.</p>
-            </div>
-            <div className="aspect-square bg-background/5 rounded-full border border-background/10 flex items-center justify-center">
-               <Code2 className="text-accent" size={200} />
-            </div>
-          </div>
-        </div>
+          );
+        })}
       </section>
 
       {/* STATS STRIP */}
@@ -527,7 +478,7 @@ const App = () => {
                 <div className="text-accent mb-2 tracking-[0.5em]">Navigation</div>
                 <a href="#about" className="hover:text-accent transition-colors">About</a>
                 <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
-                <a href="#protocol" className="hover:text-accent transition-colors">Protocol</a>
+                <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
               </div>
               <div className="flex flex-col gap-6">
                 <div className="text-accent mb-2 tracking-[0.5em]">Resources</div>
